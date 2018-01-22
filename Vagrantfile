@@ -66,11 +66,12 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
    config.vm.provision "shell", inline: <<-SHELL
      apt-get update
-     apt-get install -y openssh-server git
+     apt-get install -y openssh-server git nmap
      git clone https://github.com/kdehollander/yfc.git
      echo "#alice_key" >> .ssh/authorized_keys
-     echo yfc/alice.pub >> .ssh/authorized_keys
+     cat yfc/alice.pub >> .ssh/authorized_keys
      ifconfig | grep inet
-     sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
+     sudo sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
+     grep "PasswordAuthentication yes" /etc/ssh/sshd_config
    SHELL
 end

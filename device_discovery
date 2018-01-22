@@ -1,0 +1,22 @@
+#!/bin/bash
+cd ~/Scans
+if [ -d $(date +%Y) ]; then
+  cd $(date +%Y)
+else
+  mkdir $(date +%Y)
+  cd $(date +%Y)
+fi
+if [ -d $(date +%m) ]; then
+  cd $(date +%m)
+else
+  mkdir $(date +%m)
+  cd $(date +%m)
+fi
+if [ -d $(date +%d) ]; then
+  cd $(date +%d)
+else
+  mkdir $(date +%d)
+  cd $(date +%d)
+fi
+
+sudo nmap -sV -T4 10.10.100.* -oN $(date +%H%M)

@@ -53,8 +53,9 @@ Vagrant.configure("2") do |config|
   #   # Display the VirtualBox GUI when booting the machine
      vb.gui = false
   #
-  #   # Customize the amount of memory on the VM:
-     vb.memory = "1024"
+  #  # Customize the amount of memory on the VM:
+     #vb.memory = "512"
+     vb.customize ["modifyvm", :id, "--cpuexecutioncap", "50"]
      vb.name = "yfc_hatter"
    end
   #
@@ -66,7 +67,7 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
    config.vm.provision "shell", inline: <<-SHELL
      apt-get update
-     apt-get install -y openssh-server git nmap
+     apt-get install -y openssh-server git nmap firefox
      git clone https://github.com/kdehollander/yfc.git
      echo "#alice_key" >> .ssh/authorized_keys
      cat yfc/alice.pub >> .ssh/authorized_keys

@@ -54,7 +54,7 @@ Vagrant.configure("2") do |config|
      vb.gui = false
   #
   #  # Customize the amount of memory on the VM:
-     #vb.memory = "512"
+     vb.memory = "1024"
      vb.customize ["modifyvm", :id, "--cpuexecutioncap", "50"]
      vb.name = "yfc_hatter"
    end

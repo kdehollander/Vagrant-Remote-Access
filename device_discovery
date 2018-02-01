@@ -1,5 +1,11 @@
 #!/bin/bash
-cd ~/Scans
+cd ~
+if [ -d ~/Scans ]; then
+  cd ~/Scans
+else
+  mkdir ~/Scans
+  cd ~/Scans
+fi
 if [ -d $(date +%Y) ]; then
   cd $(date +%Y)
 else
@@ -20,3 +26,5 @@ else
 fi
 
 sudo nmap -sV -T4 10.10.100.* -oN $(date +%H%M)
+
+

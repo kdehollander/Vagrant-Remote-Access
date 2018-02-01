@@ -71,8 +71,8 @@ Vagrant.configure("2") do |config|
      git clone https://github.com/kdehollander/yfc.git
      echo "#alice_key" >> .ssh/authorized_keys
      cat yfc/alice.pub >> .ssh/authorized_keys
-     ifconfig | grep inet
      sudo sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
      grep "PasswordAuthentication yes" /etc/ssh/sshd_config
+     hostname -I
    SHELL
 end

@@ -25,6 +25,16 @@ else
   cd $(date +%d)
 fi
 
-sudo nmap -sV -T4 10.10.100.* -oN $(date +%H%M)
-
+ip_addr=$(ifconfig en0 | awk '/inet / {print $2; }')
+echo $ip_addr
+first_num=$(echo $ip_addr | cut -d '.' -f1)
+if [ $first_num -eq "10" ]; then
+   sudo nmap -sV -T4 10.*.*.* -oN $(date +%H%M)
+elif [ $first_num -eq "172" ]; then
+   sudo nmap -sV -T4 172.16.*.* -oN $(date +%H%M)
+elif [ $first_num -eq "192" ]; then
+   sudo nmap -sV -T4 192.168.*.* -oN $(date +%H%M)
+else
+   sudo nmap -sV -T4 $first_num.*.*.* -oN $(date +%H%M)
+fi
 
